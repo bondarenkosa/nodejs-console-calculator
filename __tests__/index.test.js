@@ -1,6 +1,7 @@
-import runCalc from '../src';
+import calc from '../src';
 
-test('run calc', () => {
-  const expected = 'hello';
-  expect(runCalc()).toEqual(expected);
+test('simple math expression', () => {
+  const expression = '1+2';
+
+  expect(calc(expression)).toEqual(3);
 });
