@@ -7,7 +7,7 @@ describe('#tokenize', () => {
     expect(calc(expression)).toEqual(3);
   });
 
-  test('priority test', () => {
+  test('precedence test', () => {
     const expression = ' 2.5  + (1 + ---1 + 4) * 3 ** 2 * 2 / (2 + 4)**2 + 1 - 1';
 
     expect(calc(expression)).toEqual(4.5);

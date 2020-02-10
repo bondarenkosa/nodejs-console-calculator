@@ -27,6 +27,25 @@ export default class Parser {
     });
   }
 
+  static token(predicateFn) {
+    return Parser.from((tokens) => {
+      if (tokens.length === 0) {
+        return null;
+      }
+
+      const curr = tokens[0];
+
+      if (!predicateFn(curr)) {
+        return null;
+      }
+
+      return {
+        result: curr,
+        rest: tokens.slice(1),
+      };
+    });
+  }
+
   static any(...ps) {
     return ps.flat().reduce((anyP, p) => anyP.or(p));
   }
@@ -34,6 +53,10 @@ export default class Parser {
   static anyFromString(str) {
     const parsers = str.split('').map(Parser.char);
     return Parser.any(parsers);
+  }
+
+  static lazy(mkParser) {
+    return Parser.from((tokens) => mkParser().parse(tokens));
   }
 
   static inject(injectedValue) {
