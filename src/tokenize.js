@@ -32,7 +32,7 @@ export default (input) => {
     NUM.map((val) => ({ type: 'number', value: val.join('') })),
     OP.map((value) => ({ type: 'operator', value })),
     OPAREN.map((value) => ({ type: 'openParenthesis', value })),
-    CPAREN.map((value) => ({ type: 'closeParenthesis', value }))
+    CPAREN.map((value) => ({ type: 'closeParenthesis', value })),
   );
   const tokenizer = P.many1(TOKENS);
   const parsed = tokenizer.parse(input);
