@@ -13,13 +13,13 @@ const CPAREN = P.char(')')
 const DIGIT = P.anyFromString('0123456789');
 
 const INT = P.many1(DIGIT)
-  .map((nums) => Number(nums.join('')));
+  .map((digits) => digits.join(''));
 
 const SEPARATOR = P.char('.');
 
 const FLOAT = P.many1(DIGIT)
   .chain((intPart) => SEPARATOR.chain((sep) => P.many1(DIGIT)
-    .map((fractPart) => Number([...intPart, sep, ...fractPart].join('')))));
+    .map((fractPart) => [...intPart, sep, ...fractPart].join(''))));
 
 const NUM = FLOAT.or(INT)
   .map((value) => ({ type: 'number', value }));

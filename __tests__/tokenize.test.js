@@ -8,9 +8,9 @@ describe('#tokenize', () => {
   test('simple valid math expression', () => {
     const mathExpression = '1+2';
     const expected = [
-      { type: 'number', value: 1 },
+      { type: 'number', value: '1' },
       { type: 'operator', value: '+' },
-      { type: 'number', value: 2 },
+      { type: 'number', value: '2' },
     ];
 
     expect(tokenize(mathExpression)).toEqual(expected);
@@ -22,18 +22,18 @@ describe('#tokenize', () => {
       { type: 'operator', value: '-' },
       { type: 'openParenthesis', value: '(' },
       { type: 'operator', value: '-' },
-      { type: 'number', value: 5.9 },
+      { type: 'number', value: '5.9' },
       { type: 'operator', value: '+' },
-      { type: 'number', value: 2 },
+      { type: 'number', value: '2' },
       { type: 'operator', value: '**' },
-      { type: 'number', value: 2 },
+      { type: 'number', value: '2' },
       { type: 'closeParenthesis', value: ')' },
       { type: 'operator', value: '*' },
-      { type: 'number', value: 10 },
+      { type: 'number', value: '10' },
       { type: 'operator', value: '/' },
-      { type: 'number', value: 2 },
+      { type: 'number', value: '2' },
       { type: 'operator', value: '-' },
-      { type: 'number', value: 0 },
+      { type: 'number', value: '0' },
     ];
 
     expect(tokenize(mathExpression)).toEqual(expected);
