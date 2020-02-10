@@ -1,7 +1,7 @@
-import tokenize from './tokenize';
-import calc from './calculate';
 import chalk from 'chalk';
 import readlineSync from 'readline-sync';
+import tokenize from './tokenize';
+import calc from './calculate';
 
 
 const runCalc = () => {
@@ -12,7 +12,7 @@ const runCalc = () => {
     try {
       const result = calc(tokenize(expression));
       console.log(chalk.yellow(`Result: ${result}`));
-    } catch(err) {
+    } catch (err) {
       console.log(chalk.red(err.message));
     }
 
