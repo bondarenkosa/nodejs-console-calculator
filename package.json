@@ -42,5 +42,8 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "dependencies": {}
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "readline-sync": "^1.4.10"
+  }
 }

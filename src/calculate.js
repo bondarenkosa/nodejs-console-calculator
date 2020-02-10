@@ -72,14 +72,14 @@ export default (tokens) => {
   const parsed = EXPR.parse(tokens);
 
   if (parsed === null) {
-    throw new SyntaxError('Unexpected tokens');
+    throw new SyntaxError('Invalid math expression');
   }
 
   const { result, rest } = parsed;
 
   const hasUnrecognizedTokens = rest.length > 0;
   if (hasUnrecognizedTokens) {
-    throw new SyntaxError('Unexpected tokens');
+    throw new SyntaxError('Invalid math expression');
   }
 
   return result;
