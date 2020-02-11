@@ -67,17 +67,4 @@ export const getSortedOperationsLexemes = () => operations
   .map(({ operator }) => operator)
   .sort((a, b) => b.length - a.length);
 
-// export const getOperationsByType = (opType) => operations
-//   .filter(({ type }) => type === opType)
-//   .map(({ operators }) => operators)
-//   .flat();
-
-// export const getBinaryOperationsByPrecedence = (pr) => operations
-//   .filter(({ type, precedence }) => type === 'binary' && precedence === pr)
-//   .map(({ operators }) => operators)
-//   .flat();
-
-// export const getOperationsByPrecedence = (pr) => operations
-//   .filter(({ precedence }) => precedence === pr);
-
 export default () => operations;
