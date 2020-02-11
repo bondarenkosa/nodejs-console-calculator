@@ -12,6 +12,14 @@ const makeOperationsParser = (ops) => P.any(
   ops.map((op) => makeOperatorParser(op.operator, op.fn)),
 );
 
+const makeUnaryOperationChain = (term, unaryOp) => unaryOp.chain((opFn) => term
+  .map((x) => opFn(x)));
+
+const makeBinaryOperationChain = (term1, term2, binaryOp) => term1
+  .chain((x) => binaryOp.chain((opFn) => term2
+    .map((y) => opFn(x, y))))
+  .or(term1);
+
 
 const NUM = makeTokenParserByType('number');
 
@@ -36,36 +44,17 @@ const FACTOR = P.any(
   // eslint-disable-next-line
   OPAREN.chain(() => P.lazy(() => EXPR)
     .chain((exp) => CPAREN
-      .map(() => (exp)))),
+      .map(() => exp))),
 );
 
-const T1 = P.any(
-  UNARY_OPS.chain((opFn) => T1
-    .map((x) => opFn(x))),
+const T1 = makeUnaryOperationChain(P.lazy(() => T1), UNARY_OPS)
+  .or(FACTOR);
 
-  FACTOR,
-);
+const T2 = makeBinaryOperationChain(T1, P.lazy(() => T2), BINARY_OPS_PR15);
 
-const T2 = P.any(
-  T1.chain((x) => BINARY_OPS_PR15.chain((opFn) => T2
-    .map((y) => opFn(x, y)))),
+const T3 = makeBinaryOperationChain(T2, P.lazy(() => T3), BINARY_OPS_PR14);
 
-  T1,
-);
-
-const T3 = P.any(
-  T2.chain((x) => BINARY_OPS_PR14.chain((opFn) => T3
-    .map((y) => opFn(x, y)))),
-
-  T2,
-);
-
-const EXPR = P.any(
-  T3.chain((x) => BINARY_OPS_PR13.chain((opFn) => EXPR
-    .map((y) => opFn(x, y)))),
-
-  T3,
-);
+const EXPR = makeBinaryOperationChain(T3, P.lazy(() => EXPR), BINARY_OPS_PR13);
 
 
 export default (tokens) => {
