@@ -35,7 +35,7 @@ $ make run
 ```
 
 ```console
-Enter the expression: -(2 + 3 ** 2) ** 3
+Enter the expression: (2 + 3 ** 2) ** 3
 Result: -1331
 Repeat? [y/n]:
 ```
@@ -48,17 +48,16 @@ Add:
 
 ```js
 ...
-exponentiation: {
-  type: 'binary',
-  precedence: 15,
-  operator: '^',
-  fn: (x, y) => Math.pow(x, y),
-},
-remainder: {
-  type: 'binary',
-  precedence: 14,
-  operator: '%',
-  fn: (x, y) => x % y,
-},
+{
+    type: 'binary',
+    precedence: 16,
+    operators: [
+      {
+        name: 'Exponentiation',
+        operator: '**',
+        fn: (x, y) => x ** y,
+      },
+    ],
+  },
 ...
 ```
